@@ -71,6 +71,7 @@
           this.isShow = !this.isShow
           this.nowIndex = index
         },100)
+        this.$emit('onchange',index)
       },
       //TODO 设置幻灯片自动轮播
       runInv() {

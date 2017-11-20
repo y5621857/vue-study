@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="index-right">
-      <slide-show :slides="slides" :inv="slideSpeed"></slide-show>
+      <slide-show :slides="slides" :inv="slideSpeed" @onchange="slideChange"></slide-show>
       <div class="index-board-list">
         <div class="index-board-item" v-for="( item , index ) in boardList"
              :class="[ { 'line-last': index % 2 !== 0 }, 'index-board-' + item.id ]"
@@ -44,15 +44,16 @@
 
 <script>
   import slideShow from '../components/slideShow'
+  
   export default {
     name: 'tpl',
-    components:{
+    components: {
       slideShow
     },
-    created(){
-      this.$http.get('api/getNewsList').then((res)=>{
+    created() {
+      this.$http.get('api/getNewsList').then((res) => {
         this.newsList = res.data
-      },(err)=>{
+      }, (err) => {
         console.log(err)
       })
     },
@@ -159,6 +160,11 @@
             saleout: false
           }
         ],
+      }
+    },
+    methods: {
+      slideChange(index) {
+        console.log('slide run to '+index)
       }
     }
   }
