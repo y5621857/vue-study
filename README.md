@@ -10,7 +10,7 @@
 # 安装工具包
 npm install
 
-# 测试阶段，启动服务，并自动热更新在 localhost:8080
+# 测试阶段，启动服务，并自动热更新在 localhost:8080，后台数据接口在 localhost:8081(代理到8080端口，访问路径/api/)
 npm run dev
 
 # 生成项目
