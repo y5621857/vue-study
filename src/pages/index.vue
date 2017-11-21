@@ -46,7 +46,7 @@
   import slideShow from '../components/slideShow'
   
   export default {
-    name: 'tpl',
+    name: 'IndexPage',
     components: {
       slideShow
     },
@@ -64,17 +64,17 @@
           {
             src: require('../assets/slideShow/pic1.jpg'),
             title: '幻灯片1',
-            href: 'detail/analysis'
+            href: 'detail/count'
           },
           {
             src: require('../assets/slideShow/pic2.jpg'),
             title: '幻灯片2',
-            href: 'detail/count'
+            href: 'detail/analysis'
           },
           {
             src: require('../assets/slideShow/pic3.jpg'),
             title: '幻灯片3',
-            href: 'http://xxx.xxx.com'
+            href: 'detail/publish'
           },
           {
             src: require('../assets/slideShow/pic4.jpg'),
@@ -164,7 +164,7 @@
     },
     methods: {
       slideChange(index) {
-        console.log('slide run to '+index)
+        //console.log('slide run to '+index)
       }
     }
   }

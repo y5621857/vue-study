@@ -1,13 +1,17 @@
 <template>
-  <div>
+  <div class="PageWarp">
     <div class="app-head">
       <div class="app-head-inner">
-        <img src="../assets/logo.png">
+        <router-link :to="{path:'/'}">
+          <img src="../assets/logo.png">
+        </router-link>
         <div class="head-nav">
           <ul class="nav-list">
-            <li @click="logClick">登录</li>
+            <li v-if="userInfo">{{userInfo.username}}</li>
+            <li v-if="!userInfo" @click="logClick">登录</li>
             <li class="nav-pile">|</li>
-            <li @click="regClick">注册</li>
+            <li v-if="userInfo" @click="logoutClick">退出</li>
+            <li v-if="!userInfo" @click="regClick">注册</li>
             <li class="nav-pile">|</li>
             <li @click="aboutClick">关于</li>
           </ul>
@@ -27,20 +31,26 @@
     </my-dialog>
     
     <my-dialog :is-show="isShowLogDialog" @on-close="closeDialog('isShowLogDialog')">
-      <p>Log</p>
+      <log-form @has-log="afterLogin"></log-form>
     </my-dialog>
     
     <my-dialog :is-show="isShowRegDialog" @on-close="closeDialog('isShowRegDialog')">
-      <p>reg</p>
+      <reg-form></reg-form>
     </my-dialog>
   </div>
 </template>
 
 <script>
   import MyDialog from './base/dialog'
+  import LogForm from './logForm'
+  import RegForm from './regForm.vue'
   
   export default {
-    components: {MyDialog},
+    components: {
+      MyDialog,
+      LogForm,
+      RegForm,
+    },
     name: 'Layout',
     compontents: {
       MyDialog
@@ -50,6 +60,7 @@
         isShowAboutDialog: false,
         isShowLogDialog: false,
         isShowRegDialog: false,
+        userInfo: null
       }
     },
     methods: {
@@ -59,11 +70,19 @@
       logClick() {
         this.isShowLogDialog = true
       },
+      logoutClick(){
+        this.userInfo = null
+      },
       regClick() {
         this.isShowRegDialog = true
       },
       closeDialog(attr) {
         this[attr] = false
+      },
+      afterLogin(userInfo) {
+        console.log(userInfo)
+        this.isShowLogDialog = false
+        this.userInfo = userInfo
       }
     }
   }
@@ -105,6 +124,11 @@
   
   body {
     line-height: 1;
+  }
+  
+  .app-content {
+    min-height: 600px;
+    overflow: hidden;
   }
   
   ol, ul {
@@ -245,6 +269,11 @@
   
   .g-form-error {
     color: red;
+    padding-left: 15px;
+  }
+  
+  .g-form-success {
+    color: green;
     padding-left: 15px;
   }
 </style>

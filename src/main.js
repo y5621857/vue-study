@@ -4,6 +4,7 @@ import Vue from 'vue'
 import router from './router'
 import Layout from './components/layout'
 import VueResource from 'vue-resource'
+import _ from 'lodash'
 
 Vue.config.productionTip = false
 
